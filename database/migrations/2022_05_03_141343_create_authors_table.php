@@ -14,9 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('authors', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('user_id');
+            $table->id()->autoIncrement();
+            $table->unsignedBigInteger('user_id');
             $table->string('about');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -27,6 +29,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('authors', function ($table){
+            $table->dropForeign('authors_user_id_foreign');
+        });
         Schema::dropIfExists('authors');
     }
 };
