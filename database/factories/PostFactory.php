@@ -21,6 +21,8 @@ class PostFactory extends Factory
         return [
             'author_id' => $authorId,
             'text' => $this->faker->text(),
+            'created_at' => $this->faker->date(),
+            'updated_at' => $this->faker->date(),
         ];
     }
 }
