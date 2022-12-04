@@ -1,21 +1,23 @@
 <template>
-    <div class="accordion accordion-flush" id="posts"
-         style="padding-right: 300px; padding-left: 300px; padding-top: 100px ">
-        <div v-for="(author, index) in authors" class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        :data-bs-target="'#item-' + index"
-                        :aria-controls="'item-' + index">
-                    {{ author.split(';')[0] }}
-                </button>
-            </h2>
-            <div :id="'item-' + index" class="accordion-collapse collapse" aria-labelledby="'item-' + index" data-bs-parent="#posts">
-                <div class="accordion-body">
-                    <post v-bind:authorPosts="authorPosts(author.split(';')[2])"></post>
-                </div>
-            </div>
+  <div class="accordion" id="posts">
+    <div v-for="(authorWithPosts, index) in allPosts" class="accordion-item">
+      <h2 class="accordion-header" :id="'author-' + index">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse"
+                :data-bs-target="'#item' + index"
+                aria-expanded="false"
+                :aria-controls="'item' + index">
+          {{ authorWithPosts.name }}
+        </button>
+      </h2>
+      <div :id="'item' + index" class="accordion-collapse collapse" :aria-labelledby="'#author-' + index"
+           data-bs-parent="#posts">
+        <div class="accordion-body">
+          <post v-if="allPosts[index]" v-bind:authorPosts="allPosts[index]"></post>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 
@@ -24,26 +26,18 @@
 import post from "./post";
 
 export default {
-    components: {post},
-    props: [
-        'allPosts',
-    ],
-    data() {
-        return {
-            authorPosts: function (authorId) {
-                return this.allPosts.filter(item => item.user_id == authorId)
-            }
-        }
-    },
-    mounted() {
+  components: {post},
+  props: [
+    'allPosts',
+  ],
+  data() {
+    return {}
+  },
 
-    },
-    methods: {},
-    computed: {
-        authors() {
-            return [...new Set((this.allPosts).map(item => item.first_name.concat(' ', item.last_name).concat('; ', item.email).concat('; ', item.user_id)))]
-        },
-    }
+  mounted() {
+  },
+
+  methods: {},
 }
 </script>
 

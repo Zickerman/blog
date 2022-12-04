@@ -6,9 +6,8 @@
 <body>
 @include('nav')
 
-<div id="app">
-    @yield('content')
-</div>
+
+<img style="width:100%;" src="/img/home_page_bg.jpg" class="img-fluid" alt="...">
 
 
 <script src="./js/app.js"></script>
@@ -16,6 +15,4 @@
 
 @include('footer')
 </body>
-
-
 </html>

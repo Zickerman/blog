@@ -21,13 +21,20 @@ class User extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'email',
-        'first_name',
-        'second_name',
+		'name',
+		'email',
+        'password',
     ];
+	protected $hidden = [
+		'password',
+		'remember_token',
+	];
+	protected $casts = [
+		'email_verified_at' => 'datetime',
+	];
 
-    public function author(){
-        return $this->belongsTo(User::class);
+    public function posts(){
+        return $this->hasMany(Post::class);
     }
 
 

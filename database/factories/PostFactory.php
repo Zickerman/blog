@@ -2,7 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Author;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,12 +18,13 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $authorId = array_rand(array_flip(Author::pluck('id')->toArray()), 1);
         return [
-            'author_id' => $authorId,
-            'text' => $this->faker->text(),
-            'created_at' => $this->faker->date(),
-            'updated_at' => $this->faker->date(),
+			'user_id' => User::factory(),
+			'category_id' => Category::factory(),
+			'slug' => $this->faker->slug,
+            'title' => $this->faker->sentence,
+            'excerpt' => $this->faker->sentence,
+			'body' => $this->faker->paragraph,
         ];
     }
 }

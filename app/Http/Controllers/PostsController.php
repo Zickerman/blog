@@ -15,15 +15,16 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+	public function main(){
+		return view('main');
+	}
+
     public function index()
     {
-        $allPosts = DB::table('posts')->
-        join('authors', 'author_id', '=', 'authors.id')->
-        join('users', 'users.id', '=', 'authors.user_id')->
-        select('authors.user_id', 'posts.text', 'posts.created_at', 'users.first_name', 'users.last_name', 'users.email')->
-        get();
+        $allUsersWithPosts = User::with(['posts'])->get();
 
-        return view('posts', ['allPosts' => $allPosts]);
+        return view('posts', ['usersWithPosts' => $allUsersWithPosts]);
     }
 
     /**

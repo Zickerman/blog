@@ -1,4 +1,3 @@
-import test from "./components/test";
 import posts from "./components/posts";
 import notFound from "./components/notFound";
 

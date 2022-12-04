@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Author>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
-class AuthorFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +17,8 @@ class AuthorFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
-            'about' => $this->faker->text(),
+            'name' => $this->faker->word,
+			'slug' => $this->faker->slug,
         ];
     }
 }
