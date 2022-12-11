@@ -7,7 +7,7 @@
                 :data-bs-target="'#i-' + i"
                 aria-expanded="false"
                 :aria-controls="'i-' + i">
-          ({{ post.published_at }}) {{ post.title }}
+          {{ post.title }} {{ formatPostedDate(post.published_at) }}
         </button>
       </h2>
       <div :id="'i-' + i" class="accordion-collapse collapse" aria-labelledby="'#i-' + i"
@@ -22,11 +22,18 @@
 
 
 <script>
+import {localeDate}  from '../my-js-functions.js';
 
 export default {
   props: [
     'authorPosts',
   ],
+
+  methods:{
+    formatPostedDate(date) {
+      return localeDate(date);
+    },
+  },
 
 
 }

@@ -12,7 +12,7 @@ class Post extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'text',
+        'slug', 'title', 'excerpt', 'body'
     ];
 
 

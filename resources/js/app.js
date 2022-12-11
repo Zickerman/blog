@@ -1,14 +1,17 @@
-import Vue from 'vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import routes from "./routes";
+
+Vue.use(VueRouter);
 
 require('./bootstrap');
 
 window.Vue = require('vue');
 
 
-Vue.component('posts', require('./components/posts.vue').default);
-
-
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    router: new VueRouter(routes)
 });

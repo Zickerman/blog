@@ -1,20 +1,23 @@
+import home from "./components/home";
 import posts from "./components/posts";
-import notFound from "./components/notFound";
+import login from "./components/login.vue";
 
 export default {
     mode: 'history',
+    linkActiveClass: 'active',
+
     routes: [
         {
-            path: '*',
-            component: notFound
-        },
-        {
-            path: '/',
-            component: test
+            path: '/home',
+            component: home
         },
         {
             path: '/posts',
             component: posts
+        },
+        {
+            path: '/login',
+            component: login
         }
     ]
 

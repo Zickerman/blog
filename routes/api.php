@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+	return $request->user();
 });
 
-Route::resource('/posts', PostsController::class);
+Route::get('posts', "App\Http\Controllers\ApiController@getAllUsersWithPosts");
+Route::get('posts/{id}', 'App\Http\Controllers\ApiController@getPost');
+Route::post('posts', 'App\Http\Controllers\ApiController@createPost');
+Route::put('posts/{id}', 'App\Http\Controllers\ApiController@updatePost');
+Route::delete('posts/{id}', 'App\Http\Controllers\ApiController@deletePost');
