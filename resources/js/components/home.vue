@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="back-g">
     <NavBar></NavBar>
-    <img style="width:100%;" src="/img/home_page_bg.jpg" class="img-fluid" alt="...">
+    <h1>SOME TEXT</h1>
   </div>
 
 </template>
@@ -19,5 +19,14 @@ export default {
 </script>
 
 <style scoped>
+.back-g {
+  height: 100vh;
+  background: url("/img/home_page_bg.jpg") no-repeat;
+  background-size: 100%;
+}
 
+h1 {
+  color: white;
+  text-align: center;
+}
 </style>
