@@ -1,17 +1,7 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+require('./bootstrap');
+import {createApp} from "vue";
 import routes from "./routes";
 
-Vue.use(VueRouter);
-
-require('./bootstrap');
-
-window.Vue = require('vue');
-
-
-
-const app = new Vue({
-    el: '#app',
-
-    router: new VueRouter(routes)
-});
+createApp({})
+    .use(routes)
+    .mount('#app')

@@ -4,7 +4,6 @@
       <NavBar></NavBar>
 
       <div class="container">
-
         <div class="row">
           <spiner v-if="loading"></spiner>
           <div v-else class="col-lg-3 col-md-4 col-6 thumb" v-for="image in images">
@@ -45,16 +44,11 @@ export default {
           this.loading = false;
         });
   },
-  async setup(){
 
-  }
 }
 </script>
 
 <style scoped>
-.gallery {
-  /*background: #2c3034;*/
-}
 
 .thumb img {
   filter: none;
