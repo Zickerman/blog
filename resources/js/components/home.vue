@@ -1,7 +1,7 @@
 <template>
   <div class="back-g">
     <NavBar></NavBar>
-    <h1>SOME TEXT</h1>
+    <h1>HELLO THIS IS MY FIRST BLOG</h1>
   </div>
 
 </template>

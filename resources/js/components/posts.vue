@@ -9,16 +9,26 @@
         electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
         Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
         Aldus PageMaker including versions of Lorem Ipsum.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+
+      <div class="row">
+        <div class="input-group mb-3">
+          <button class="btn btn-primary me-auto p-2">Learn more</button>
+        </div>
+
+        <div class="input-group mb-2">
+          <input v-model="search" type="text" class="form-control" placeholder="Find ...   Type post's title"
+                 aria-label="Recipient's username" aria-describedby="button-addon2">
+        </div>
+      </div>
     </div>
 
     <div class="container">
 
       <div class="row">
         <div class="accordion" id="posts">
-          <div v-for="(authorWithPosts, index) in authorsWithPosts" class="accordion-item">
+          <div v-for="(authorWithPosts, index) in searchHandler" class="accordion-item">
             <h2 class="accordion-header" :id="'author-' + index">
-              <button class="accordion-button collapsed" type="button"
+              <button class="accordion-button" :class="{collapsed : rollUp}" type="button"
                       data-bs-toggle="collapse"
                       :data-bs-target="'#item' + index"
                       aria-expanded="false"
@@ -26,10 +36,11 @@
                 {{ authorWithPosts.name }}
               </button>
             </h2>
-            <div :id="'item' + index" class="accordion-collapse collapse" :aria-labelledby="'#author-' + index"
+            <div :id="'item' + index" class="accordion-collapse" :class="{collapse: rollUp}"
+                 :aria-labelledby="'#author-' + index"
                  data-bs-parent="#posts">
               <div class="accordion-body">
-                <post v-if="authorsWithPosts[index]" :authorPosts="authorsWithPosts[index]"></post>
+                <post v-if="searchHandler[index]" :authorPosts="searchHandler[index]"></post>
               </div>
             </div>
           </div>
@@ -55,17 +66,37 @@ export default {
 
   data() {
     return {
+      search: '',
       authorsWithPosts: {},
+      rollUp: true,
     }
   },
 
-  mounted() {
+  created() {
     axios
         .get('/api/posts')
         .then(response => (this.authorsWithPosts = response.data));
   },
 
   methods: {},
+  computed: {
+    searchHandler() {
+      return this.authorsWithPosts.filter(el => {
+
+        for (var i = 0; el.posts.length > i; i++) {
+
+          if (this.search === '') {
+            this.rollUp = true;
+            return true;
+          }
+          else if (el.posts[i].title.toLowerCase().includes(this.search.toLowerCase())) {
+            this.rollUp = false;
+            return el.posts[i].title.toLowerCase().includes(this.search.toLowerCase());
+          }
+        }
+      })
+    }
+  }
 }
 </script>
 
